@@ -1,0 +1,43 @@
+<header>
+    <h1 class="title">Currency Converter !</h1>
+</header>
+
+<section>
+      <p><h4>Enter an amount, select 'from' and 'to' currencies and click 'Convert' !</p>
+</section>
+
+<section>
+  <%= form_tag("/", :method => :get, :class => "form") do %>
+    <div class="form__row">
+      <div class="form__field">
+        <%= label_tag :amount %><br>
+        <%= number_field_tag :amount, nil, step: 0.1, min: 0 %>
+      </div><br>
+      <div class="form__field">
+        <%= label_tag :from %><br>
+        <%= select_tag :from, options_for_select(@currency_codes) %>
+      </div>
+      <div class="form__field">
+        <%= label_tag :to %><br>
+        <%= select_tag :to, options_for_select(@currency_codes) %>
+      </div><br>
+      <div class="form__field">
+         <%= submit_tag("Convert") %>
+      </div>     
+    </div>
+  <% end %>
+ </section>
+
+ <section>
+  <% if @converted_amount %>
+  <div class="result">
+    <p><%= @amount %> <%= @from %> = <%= @converted_amount %> <%= @to %></p>
+    <p>The Rate of Currency Conversion is 1 <%= @from %> = <%= @rate_of_conversion%> <%= @to %></p>
+  </div>
+  <% end %>
+</section>
+</div>
+
+<footer>
+   <p>Note: This application uses <%= link_to "ExchangeRate API", "https://www.exchangerate-api.com/", :target => "_blank" %> </p>
+</footer>
